@@ -12,12 +12,17 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     background-color: inherit;
+    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
 
     transition: 0.2s;
 
     &:disabled {
       cursor: not-allowed;
+    }
+
+    &:hover, &:focus {
+      opacity: 0.7;
     }
   }
 `;
