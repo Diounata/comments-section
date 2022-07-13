@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     border: none;
     background-color: inherit;
     -webkit-tap-highlight-color: transparent;
+    font-size: inherit;
     cursor: pointer;
 
     transition: 0.2s;
