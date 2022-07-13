@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-const Container = styled.section`
+const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 
   width: 100%;
+  margin-left: ${({ type }) => (type === 'reply' ? '2rem' : '0px')};
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.COLOR.WHITE};
@@ -13,6 +14,21 @@ const Container = styled.section`
 
   font-size: 0.75rem;
   color: #7a7b7f;
+
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: ${({ isFirstReply }) => (isFirstReply ? '0' : '-1rem')};
+
+    width: 3px;
+    height: 100%;
+    padding-bottom: 1rem;
+
+    background-color: ${({ type }) => (type === 'reply' ? '#e8e9ed' : 'none')};
+  }
 `;
 
 const Header = styled.header`

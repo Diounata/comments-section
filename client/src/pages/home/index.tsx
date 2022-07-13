@@ -7,9 +7,9 @@ import { DeleteModal } from '../../components/DeleteModal';
 export function Home() {
   return (
     <Container>
-      <Comment />
-      <Comment />
-      <Comment />
+      <Comment isLoggedUser={false} type="comment" />
+      <Comment isLoggedUser={true} type="reply" isFirstReply />
+      <Comment isLoggedUser={false} type="reply" />
 
       <AddComment />
 
