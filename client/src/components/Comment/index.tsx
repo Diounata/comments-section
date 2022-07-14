@@ -28,7 +28,7 @@ interface Props {
 }
 
 export function Comment({ isFirstReply = false, type, comment }: Props) {
-  const { loggedUser } = useComment();
+  const { loggedUser, toggleIsDeletingComment } = useComment();
 
   const { content, createdAt, replyingTo, score, user } = comment;
 
@@ -68,7 +68,7 @@ export function Comment({ isFirstReply = false, type, comment }: Props) {
         <ButtonsContainer>
           {user.username === loggedUser!.username ? (
             <>
-              <Button color="RED">
+              <Button color="RED" onClick={toggleIsDeletingComment}>
                 <img src={DeleteSVG} alt="Delete" title="Delete" /> Delete
               </Button>
 

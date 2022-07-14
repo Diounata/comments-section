@@ -40,13 +40,21 @@ interface LoggedUserProps {
 interface Props {
   loggedUser: LoggedUserProps | null;
   comments: CommentProps[] | null;
+  isDeletingComment: boolean;
   isLoading: boolean;
+
+  toggleIsDeletingComment(): void;
 }
 
 export function CommentProvider({ children }: ChildrenProps) {
   const [comments, setComments] = useState<CommentProps[] | null>(null);
   const [loggedUser, setLoggedUser] = useState<LoggedUserProps | null>(null);
+  const [isDeletingComment, setIsDeletingComment] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  function toggleIsDeletingComment() {
+    setIsDeletingComment(prev => !prev);
+  }
 
   useEffect(() => {
     const { currentUser, comments } = data;
@@ -58,7 +66,9 @@ export function CommentProvider({ children }: ChildrenProps) {
   }, []);
 
   return (
-    <CommentContext.Provider value={{ comments, loggedUser, isLoading }}>
+    <CommentContext.Provider
+      value={{ comments, loggedUser, isDeletingComment, toggleIsDeletingComment, isLoading }}
+    >
       {children}
     </CommentContext.Provider>
   );

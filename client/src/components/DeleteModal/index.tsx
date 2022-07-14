@@ -1,6 +1,19 @@
 import { GlobalContainer, Modal, Title, Message, Footer, Button } from './styles';
+import { useEffect } from 'react';
+
+import { useComment } from '../../contexts/CommentContext';
 
 export function DeleteModal() {
+  const { toggleIsDeletingComment } = useComment();
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <GlobalContainer>
       <Modal>
@@ -11,8 +24,13 @@ export function DeleteModal() {
         </Message>
 
         <Footer>
-          <Button variation="cancel">No, cancel</Button>
-          <Button variation="confirm">Yes, delete</Button>
+          <Button variation="cancel" onClick={toggleIsDeletingComment}>
+            No, cancel
+          </Button>
+
+          <Button variation="confirm" onClick={toggleIsDeletingComment}>
+            Yes, delete
+          </Button>
         </Footer>
       </Modal>
     </GlobalContainer>

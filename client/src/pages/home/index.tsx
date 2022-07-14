@@ -1,4 +1,5 @@
 import { Container } from './styles';
+import { Fragment } from 'react';
 
 import { Comment } from '../../components/Comment';
 import { AddComment } from '../../components/AddComment';
@@ -7,7 +8,7 @@ import { DeleteModal } from '../../components/DeleteModal';
 import { useComment } from '../../contexts/CommentContext';
 
 export function Home() {
-  const { comments, isLoading } = useComment();
+  const { comments, isDeletingComment, isLoading } = useComment();
 
   return (
     <Container>
@@ -16,18 +17,18 @@ export function Home() {
       ) : (
         <>
           {comments!.map(comment => (
-            <>
-              <Comment key={comment.id} comment={comment} type="comment" />
+            <Fragment key={comment.id}>
+              <Comment comment={comment} type="comment" />
 
               {comment.replies!.map((reply, index) => (
                 <Comment key={reply.id} comment={reply} isFirstReply={index === 0} type="reply" />
               ))}
-            </>
+            </Fragment>
           ))}
 
           <AddComment />
 
-          {false && <DeleteModal />}
+          {isDeletingComment && <DeleteModal />}
         </>
       )}
     </Container>
