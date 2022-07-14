@@ -15,32 +15,41 @@ import ReplySVG from '../../assets/icon-reply.svg';
 import DeleteSVG from '../../assets/icon-delete.svg';
 import EditSVG from '../../assets/icon-edit.svg';
 
+import { CommentProps, useComment } from '../../contexts/CommentContext';
+
+interface IComment extends CommentProps {
+  replyingTo?: string;
+}
+
 interface Props {
+  comment: IComment;
   isFirstReply?: boolean;
-  isLoggedUser: boolean;
   type: 'comment' | 'reply';
 }
 
-export function Comment({ isFirstReply = false, isLoggedUser, type }: Props) {
+export function Comment({ isFirstReply = false, type, comment }: Props) {
+  const { loggedUser } = useComment();
+
+  const { content, createdAt, replyingTo, score, user } = comment;
+
   return (
     <Container isFirstReply={isFirstReply} type={type}>
       <Header>
-        <img src="https://github.com/diego3g.png" alt="diego3g avatar" />
+        <img src={`./src/assets/avatars/${user.image}`} alt={user.username} />
 
         <p>
-          diego3g
-          {isLoggedUser && <span>you</span>}
+          {user.username}
+
+          {user.username === loggedUser!.username && <span>you</span>}
         </p>
 
-        <span>1 month ago</span>
+        <span>{createdAt}</span>
       </Header>
 
       <Main>
-        {type === 'reply' && <ReplyingTo>@Diounata </ReplyingTo>}
-        
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit quaerat numquam autem
-        suscipit quis! Tenetur at, fugit perspiciatis iusto porro veritatis. Quia debitis nam harum
-        recusandae aspernatur perspiciatis aliquam commodi.
+        {type === 'reply' && <ReplyingTo>@{replyingTo} </ReplyingTo>}
+
+        {content}
       </Main>
 
       <Footer>
@@ -49,7 +58,7 @@ export function Comment({ isFirstReply = false, isLoggedUser, type }: Props) {
             <img src={PlusSVG} alt="Like" title="Like" />
           </button>
 
-          <p>12</p>
+          <p>{score}</p>
 
           <button>
             <img src={MinusSVG} alt="Dislike" title="Dislike" />
@@ -57,7 +66,7 @@ export function Comment({ isFirstReply = false, isLoggedUser, type }: Props) {
         </FeedbackContainer>
 
         <ButtonsContainer>
-          {isLoggedUser ? (
+          {user.username === loggedUser!.username ? (
             <>
               <Button color="RED">
                 <img src={DeleteSVG} alt="Delete" title="Delete" /> Delete

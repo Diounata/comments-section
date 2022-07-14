@@ -5,8 +5,8 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
   flex-direction: column;
   gap: 1.5rem;
 
-  width: 100%;
-  margin-left: ${({ type }) => (type === 'reply' ? '2rem' : '0px')};
+  max-width: 100%;
+  margin-left: ${({ type }) => (type === 'reply' ? '1rem' : '0px')};
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.COLOR.WHITE};
