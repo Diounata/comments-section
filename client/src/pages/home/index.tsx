@@ -23,10 +23,12 @@ export function Home() {
               {comment.replies!.map((reply, index) => (
                 <Comment key={reply.id} comment={reply} isFirstReply={index === 0} type="reply" />
               ))}
+
+              {/* <AddComment type="reply" isFirstReply={comment.replies!.length === 0} /> */}
             </Fragment>
           ))}
 
-          <AddComment />
+          <AddComment type="comment" />
 
           {isDeletingComment && <DeleteModal />}
         </>

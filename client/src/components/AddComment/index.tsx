@@ -3,7 +3,12 @@ import { Container, Comment, Footer, Avatar, Button } from './styles';
 
 import { useComment } from '../../contexts/CommentContext';
 
-export function AddComment() {
+interface Props {
+  type: 'comment' | 'reply';
+  isFirstReply?: boolean;
+}
+
+export function AddComment({ type, isFirstReply = false }: Props) {
   const { loggedUser } = useComment();
 
   const updateTextareaHeight = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -12,7 +17,7 @@ export function AddComment() {
   };
 
   return (
-    <Container>
+    <Container type={type} isFirstReply={isFirstReply}>
       <Comment placeholder="Add a comment..." onKeyUp={updateTextareaHeight} />
 
       <Footer>

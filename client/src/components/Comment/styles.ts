@@ -25,7 +25,7 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
 
     width: 3px;
     height: 100%;
-    padding-bottom: 1rem;
+    padding-bottom: ${({ isFirstReply }) => (isFirstReply ? '0' : '1rem')};
 
     background-color: ${({ type }) => (type === 'reply' ? '#e8e9ed' : '')};
   }

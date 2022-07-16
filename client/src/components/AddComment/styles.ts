@@ -1,16 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
-  width: 100%;
-  padding: 1rem;
-
-  background-color: ${({ theme }) => theme.COLOR.WHITE};
-  border-radius: 8px;
-`;
+import { Container } from '../Comment/styles';
 
 const Comment = styled.textarea`
   width: 100%;
