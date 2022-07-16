@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const GlobalContainer = styled.div`
   position: fixed;
   top: 0;
+  left: 0;
 
   display: grid;
   place-items: center;

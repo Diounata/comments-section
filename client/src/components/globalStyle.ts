@@ -9,6 +9,13 @@ const GlobalStyle = createGlobalStyle`
     font: ${({ theme }) => theme.FONT.REGULAR_400};
   }
 
+  body {
+    display: grid;
+    place-items: center;
+
+    background-color: ${({ theme }) => theme.COLOR.VERY_LIGHT_GRAY};
+  }
+
   button {
     border: none;
     background-color: inherit;

@@ -20,7 +20,8 @@ export function DeleteModal() {
         <Title>Delete comment</Title>
 
         <Message>
-          Are you sure you want to delete this comment? This will remove the comment and can't be undone
+          Are you sure you want to delete this comment? This will remove the comment and can't be
+          undone
         </Message>
 
         <Footer>

@@ -7,6 +7,7 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
   gap: 1.5rem;
 
   width: ${({ type }) => (type === 'reply' ? 'calc(100% - 1rem)' : '100%')};
+  height: fit-content;
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.COLOR.WHITE};
