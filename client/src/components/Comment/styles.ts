@@ -30,6 +30,14 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
 
     background-color: ${({ type }) => (type === 'reply' ? '#e8e9ed' : '')};
   }
+
+  @media (min-width: 768px) {
+    width: ${({ type }) => (type === 'reply' ? 'calc(100% - 2rem)' : '100%')};
+
+    &::before {
+      left: -2rem;
+    }
+  }
 `;
 
 const Header = styled.header`

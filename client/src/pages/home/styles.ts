@@ -6,6 +6,10 @@ const Container = styled.div`
 
   width: calc(100vw - 2rem);
   padding: 2rem 0;
+
+  @media (min-width: 768px) {
+    width: calc(100vw - 6rem);
+  }
 `;
 
 export { Container };
