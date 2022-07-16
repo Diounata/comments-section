@@ -11,6 +11,7 @@ const Comment = styled.textarea`
   border: 1px solid ${({ theme }) => theme.COLOR.LIGHT_GRAY};
   border-radius: 8px;
   font-size: 0.8rem;
+  color: #3e424b;
   line-height: 20px;
 
   transition: 0.2s;
