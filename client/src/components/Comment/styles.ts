@@ -3,10 +3,10 @@ import styled from 'styled-components';
 const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: boolean }>`
   display: flex;
   flex-direction: column;
+  justify-self: ${({ type }) => (type === 'reply' ? 'flex-end' : 'auto')};
   gap: 1.5rem;
 
-  max-width: 100%;
-  margin-left: ${({ type }) => (type === 'reply' ? '1rem' : '0px')};
+  width: ${({ type }) => (type === 'reply' ? 'calc(100% - 1rem)' : '100%')};
   padding: 1rem;
 
   background-color: ${({ theme }) => theme.COLOR.WHITE};
@@ -27,7 +27,7 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
     height: 100%;
     padding-bottom: 1rem;
 
-    background-color: ${({ type }) => (type === 'reply' ? '#e8e9ed' : 'none')};
+    background-color: ${({ type }) => (type === 'reply' ? '#e8e9ed' : '')};
   }
 `;
 
