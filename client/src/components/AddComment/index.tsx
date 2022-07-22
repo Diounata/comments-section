@@ -1,5 +1,5 @@
 import { KeyboardEvent } from 'react';
-import { Container, Comment, Footer, Avatar, Button } from './styles';
+import { Container, Comment, Avatar, Button } from './styles';
 
 import { useComment } from '../../contexts/CommentContext';
 
@@ -20,11 +20,9 @@ export function AddComment({ type, isFirstReply = false }: Props) {
     <Container type={type} isFirstReply={isFirstReply}>
       <Comment placeholder="Add a comment..." onKeyUp={updateTextareaHeight} />
 
-      <Footer>
-        <Avatar src={`./src/assets/avatars/${loggedUser!.avatar}`} />
+      <Avatar src={`./src/assets/avatars/${loggedUser!.avatar}`} />
 
-        <Button>Send</Button>
-      </Footer>
+      <Button>Send</Button>
     </Container>
   );
 }

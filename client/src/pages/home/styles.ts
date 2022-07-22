@@ -10,6 +10,10 @@ const Container = styled.div`
   @media (min-width: 768px) {
     width: calc(100vw - 6rem);
   }
+
+  @media (min-width: 1024px) {
+    width: 45.625rem;
+  }
 `;
 
 export { Container };

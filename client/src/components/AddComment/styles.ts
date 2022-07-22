@@ -1,8 +1,21 @@
 import styled from 'styled-components';
 
-import { Container } from '../Comment/styles';
+import { Container as ContainerBase } from '../Comment/styles';
+
+const Container = styled(ContainerBase)`
+  grid-template-areas:
+    'textarea textarea'
+    'avatar button';
+
+  @media (min-width: 1024px) {
+    grid-template-areas: 'avatar textarea button';
+    grid-template-columns: auto 1fr auto;
+  }
+`;
 
 const Comment = styled.textarea`
+  grid-area: textarea;
+
   width: 100%;
   min-height: 94px;
   max-height: 150px;
@@ -24,13 +37,9 @@ const Comment = styled.textarea`
   }
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const Avatar = styled.img`
+  grid-area: avatar;
+
   width: 2rem;
   height: 2rem;
 
@@ -38,6 +47,12 @@ const Avatar = styled.img`
 `;
 
 const Button = styled.button`
+  grid-area: button;
+
+  justify-self: flex-end;
+
+  width: fit-content;
+  height: fit-content;
   padding: 1rem 2rem;
 
   background-color: ${({ theme }) => theme.COLOR.BLUE};
@@ -49,4 +64,4 @@ const Button = styled.button`
   text-transform: uppercase;
 `;
 
-export { Container, Comment, Footer, Avatar, Button };
+export { Container, Comment, Avatar, Button };

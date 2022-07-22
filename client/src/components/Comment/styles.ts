@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: boolean }>`
-  display: flex;
-  flex-direction: column;
-  justify-self: ${({ type }) => (type === 'reply' ? 'flex-end' : 'auto')};
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'main main'
+    'feedback actions';
   gap: 1.5rem;
+
+  justify-self: ${({ type }) => (type === 'reply' ? 'flex-end' : 'auto')};
 
   width: ${({ type }) => (type === 'reply' ? 'calc(100% - 1rem)' : '100%')};
   height: fit-content;
@@ -32,10 +36,23 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
   }
 
   @media (min-width: 768px) {
+    grid-template-areas:
+      'feedback header actions'
+      'feedback main main'
+      'feedback main main';
+
     width: ${({ type }) => (type === 'reply' ? 'calc(100% - 2rem)' : '100%')};
 
     &::before {
       left: -2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: ${({ type }) => (type === 'reply' ? 'calc(100% - 5.5rem)' : '100%')};
+
+    &::before {
+      left: -2.75rem;
     }
   }
 `;
@@ -44,6 +61,8 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  grid-area: header;
 
   img {
     width: 2rem;
@@ -72,6 +91,8 @@ const Header = styled.header`
 `;
 
 const Main = styled.main`
+  grid-area: main;
+
   line-height: 25px;
 `;
 
@@ -80,16 +101,14 @@ const ReplyingTo = styled.span`
   color: ${({ theme }) => theme.COLOR.BLUE};
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const FeedbackContainer = styled.article`
   display: flex;
   gap: 1.35rem;
 
+  grid-area: feedback;
+
+  width: fit-content;
+  height: fit-content;
   padding: 1rem 0.75rem;
 
   border-radius: 8px;
@@ -105,12 +124,24 @@ const FeedbackContainer = styled.article`
 
   p {
     font: ${({ theme }) => theme.FONT.MEDIUM_500};
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 1024px) {
+    width: 2.5rem;
   }
 `;
 
 const ButtonsContainer = styled.article`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+
+  grid-area: actions;
 `;
 
 const Button = styled.button<{ color: 'BLUE' | 'RED' }>`
@@ -126,4 +157,4 @@ const Button = styled.button<{ color: 'BLUE' | 'RED' }>`
   color: ${({ color, theme }) => theme.COLOR[color]};
 `;
 
-export { Container, Header, Main, ReplyingTo, Footer, FeedbackContainer, ButtonsContainer, Button };
+export { Container, Header, Main, ReplyingTo, FeedbackContainer, ButtonsContainer, Button };

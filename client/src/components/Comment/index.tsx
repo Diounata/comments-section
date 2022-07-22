@@ -2,7 +2,6 @@ import {
   Container,
   Header,
   Main,
-  Footer,
   FeedbackContainer,
   Button,
   ReplyingTo,
@@ -52,37 +51,35 @@ export function Comment({ isFirstReply = false, type, comment }: Props) {
         {content}
       </Main>
 
-      <Footer>
-        <FeedbackContainer>
-          <button>
-            <img src={PlusSVG} alt="Like" title="Like" />
-          </button>
+      <FeedbackContainer>
+        <button>
+          <img src={PlusSVG} alt="Like" title="Like" />
+        </button>
 
-          <p>{score}</p>
+        <p>{score}</p>
 
-          <button>
-            <img src={MinusSVG} alt="Dislike" title="Dislike" />
-          </button>
-        </FeedbackContainer>
+        <button>
+          <img src={MinusSVG} alt="Dislike" title="Dislike" />
+        </button>
+      </FeedbackContainer>
 
-        <ButtonsContainer>
-          {user.username === loggedUser!.username ? (
-            <>
-              <Button color="RED" onClick={toggleIsDeletingComment}>
-                <img src={DeleteSVG} alt="Delete" title="Delete" /> Delete
-              </Button>
-
-              <Button color="BLUE">
-                <img src={EditSVG} alt="Edit" title="Edit" /> Edit
-              </Button>
-            </>
-          ) : (
-            <Button color="BLUE">
-              <img src={ReplySVG} alt="Reply" title="Reply" /> Reply
+      <ButtonsContainer>
+        {user.username === loggedUser!.username ? (
+          <>
+            <Button color="RED" onClick={toggleIsDeletingComment}>
+              <img src={DeleteSVG} alt="Delete" title="Delete" /> Delete
             </Button>
-          )}
-        </ButtonsContainer>
-      </Footer>
+
+            <Button color="BLUE">
+              <img src={EditSVG} alt="Edit" title="Edit" /> Edit
+            </Button>
+          </>
+        ) : (
+          <Button color="BLUE">
+            <img src={ReplySVG} alt="Reply" title="Reply" /> Reply
+          </Button>
+        )}
+      </ButtonsContainer>
     </Container>
   );
 }
