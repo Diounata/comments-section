@@ -27,7 +27,7 @@ interface Props {
 }
 
 export function Comment({ isFirstReply = false, type, comment }: Props) {
-  const { loggedUser, toggleIsDeletingComment } = useComment();
+  const { loggedUser, toggleIsDeletingComment, getCreatedAtString } = useComment();
 
   const { content, createdAt, replyingTo, score, user } = comment;
 
@@ -42,7 +42,7 @@ export function Comment({ isFirstReply = false, type, comment }: Props) {
           {user.username === loggedUser!.username && <span>you</span>}
         </p>
 
-        <span>{createdAt}</span>
+        <span>{getCreatedAtString(createdAt)}</span>
       </Header>
 
       <Main>

@@ -1,3 +1,4 @@
+import { formatDistance } from 'date-fns';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 import data from '../data.json';
@@ -11,7 +12,7 @@ interface ChildrenProps {
 export interface RepliesProps {
   id: number;
   content: string;
-  createdAt: string;
+  createdAt: number;
   score: number;
   replyingTo: string;
   user: {
@@ -23,7 +24,7 @@ export interface RepliesProps {
 export interface CommentProps {
   id: number;
   content: string;
-  createdAt: string;
+  createdAt: number;
   score: number;
   user: {
     image: string;
@@ -44,6 +45,7 @@ interface Props {
   isLoading: boolean;
 
   toggleIsDeletingComment(): void;
+  getCreatedAtString(date: number): string;
 }
 
 export function CommentProvider({ children }: ChildrenProps) {
@@ -54,6 +56,10 @@ export function CommentProvider({ children }: ChildrenProps) {
 
   function toggleIsDeletingComment() {
     setIsDeletingComment(prev => !prev);
+  }
+
+  function getCreatedAtString(date: number) {
+    return formatDistance(new Date(date), new Date(), { addSuffix: true });
   }
 
   useEffect(() => {
@@ -67,7 +73,14 @@ export function CommentProvider({ children }: ChildrenProps) {
 
   return (
     <CommentContext.Provider
-      value={{ comments, loggedUser, isDeletingComment, toggleIsDeletingComment, isLoading }}
+      value={{
+        comments,
+        loggedUser,
+        isDeletingComment,
+        isLoading,
+        toggleIsDeletingComment,
+        getCreatedAtString,
+      }}
     >
       {children}
     </CommentContext.Provider>
