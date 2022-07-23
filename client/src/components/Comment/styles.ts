@@ -41,6 +41,7 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
       'feedback main main'
       'feedback main main';
     grid-template-columns: auto 1fr auto;
+    gap: 1.25rem;
 
     width: ${({ type }) => (type === 'reply' ? 'calc(100% - 2rem)' : '100%')};
 
