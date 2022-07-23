@@ -40,6 +40,7 @@ const Container = styled.section<{ type: 'comment' | 'reply'; isFirstReply: bool
       'feedback header actions'
       'feedback main main'
       'feedback main main';
+    grid-template-columns: auto 1fr auto;
 
     width: ${({ type }) => (type === 'reply' ? 'calc(100% - 2rem)' : '100%')};
 
