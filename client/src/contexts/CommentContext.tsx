@@ -1,5 +1,5 @@
-import { formatDistance } from 'date-fns';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { formatDistance } from 'date-fns';
 
 import data from '../data.json';
 
@@ -10,7 +10,7 @@ interface ChildrenProps {
 }
 
 export interface RepliesProps {
-  id: number;
+  id: string;
   content: string;
   createdAt: number;
   score: number;
@@ -22,7 +22,7 @@ export interface RepliesProps {
 }
 
 export interface CommentProps {
-  id: number;
+  id: string;
   content: string;
   createdAt: number;
   score: number;
