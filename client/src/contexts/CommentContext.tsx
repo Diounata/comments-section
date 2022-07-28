@@ -9,6 +9,11 @@ interface ChildrenProps {
   children: ReactNode;
 }
 
+interface UserProps {
+  image: string;
+  username: string;
+}
+
 export interface RepliesProps {
   id: string;
   content: string;
@@ -26,20 +31,12 @@ export interface CommentProps {
   content: string;
   createdAt: number;
   score: number;
-  user: {
-    image: string;
-    username: string;
-  };
+  user: UserProps;
   replies?: RepliesProps[];
 }
 
-interface LoggedUserProps {
-  avatar: string;
-  username: string;
-}
-
 interface Props {
-  loggedUser: LoggedUserProps | null;
+  loggedUser: UserProps | null;
   comments: CommentProps[] | null;
   isDeletingComment: boolean;
   isLoading: boolean;
@@ -50,7 +47,7 @@ interface Props {
 
 export function CommentProvider({ children }: ChildrenProps) {
   const [comments, setComments] = useState<CommentProps[] | null>(null);
-  const [loggedUser, setLoggedUser] = useState<LoggedUserProps | null>(null);
+  const [loggedUser, setLoggedUser] = useState<UserProps | null>(null);
   const [isDeletingComment, setIsDeletingComment] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -66,7 +63,7 @@ export function CommentProvider({ children }: ChildrenProps) {
     const { currentUser, comments } = data;
     const { image, username } = currentUser;
 
-    setLoggedUser({ avatar: image, username });
+    setLoggedUser({ image, username });
     setComments(comments);
     setIsLoading(false);
   }, []);

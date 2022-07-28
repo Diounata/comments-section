@@ -20,7 +20,7 @@ export function AddComment({ type, isFirstReply = false }: Props) {
     <Container type={type} isFirstReply={isFirstReply}>
       <Comment placeholder="Add a comment..." onKeyUp={updateTextareaHeight} />
 
-      <Avatar src={`./src/assets/avatars/${loggedUser!.avatar}`} />
+      <Avatar src={`./src/assets/avatars/${loggedUser!.image}`} />
 
       <Button>Send</Button>
     </Container>
