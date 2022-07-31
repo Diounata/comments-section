@@ -16,13 +16,12 @@ export function Home() {
         'Loading'
       ) : (
         <>
-          {comments!.map(comment => (
+          {comments!.map((comment, index) => (
             <Fragment key={comment.id}>
-              <Comment comment={comment} type="comment" />
-
-              {comment.replies!.map((reply, index) => (
-                <Comment key={reply.id} comment={reply} isFirstReply={index === 0} type="reply" />
-              ))}
+              <Comment
+                comment={comment}
+                isFirstReply={comment.type === 'reply' && comments[index - 1].type === 'comment'}
+              />
 
               {/* <AddComment type="reply" isFirstReply={comment.replies!.length === 0} /> */}
             </Fragment>

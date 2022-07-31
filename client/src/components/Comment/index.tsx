@@ -16,39 +16,32 @@ import EditSVG from '../../assets/icon-edit.svg';
 
 import { CommentProps, useComment } from '../../contexts/CommentContext';
 
-interface IComment extends CommentProps {
-  replyingTo?: string;
-}
-
 interface Props {
-  comment: IComment;
-  isFirstReply?: boolean;
-  type: 'comment' | 'reply';
+  comment: CommentProps;
+  isFirstReply: boolean;
 }
 
-export function Comment({ isFirstReply = false, type, comment }: Props) {
+export function Comment({ comment, isFirstReply }: Props) {
   const { loggedUser, toggleIsDeletingComment, getCreatedAtString } = useComment();
 
-  const { content, createdAt, replyingTo, score, user } = comment;
-
   return (
-    <Container isFirstReply={isFirstReply} type={type}>
+    <Container isFirstReply={isFirstReply} type={comment.type}>
       <Header>
-        <img src={`./src/assets/avatars/${user.image}`} alt={user.username} />
+        <img src={`./src/assets/avatars/${comment.user.image}`} alt={comment.user.username} />
 
         <p>
-          {user.username}
+          {comment.user.username}
 
-          {user.username === loggedUser!.username && <span>you</span>}
+          {comment.user.username === loggedUser!.username && <span>you</span>}
         </p>
 
-        <span>{getCreatedAtString(createdAt)}</span>
+        <span>{getCreatedAtString(comment.createdAt)}</span>
       </Header>
 
       <Main>
-        {type === 'reply' && <ReplyingTo>@{replyingTo} </ReplyingTo>}
+        {comment.replyingTo && <ReplyingTo>@{comment.replyingTo} </ReplyingTo>}
 
-        {content}
+        {comment.content}
       </Main>
 
       <FeedbackContainer>
@@ -56,7 +49,7 @@ export function Comment({ isFirstReply = false, type, comment }: Props) {
           <img src={PlusSVG} alt="Like" title="Like" />
         </button>
 
-        <p>{score}</p>
+        <p>{comment.score}</p>
 
         <button>
           <img src={MinusSVG} alt="Dislike" title="Dislike" />
@@ -64,7 +57,7 @@ export function Comment({ isFirstReply = false, type, comment }: Props) {
       </FeedbackContainer>
 
       <ButtonsContainer>
-        {user.username === loggedUser!.username ? (
+        {comment.user.username === loggedUser!.username ? (
           <>
             <Button color="RED" onClick={toggleIsDeletingComment}>
               <img src={DeleteSVG} alt="Delete" title="Delete" /> Delete

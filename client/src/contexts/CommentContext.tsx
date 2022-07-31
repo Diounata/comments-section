@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { formatDistance } from 'date-fns';
 
-import data from '../data.json';
+import { data } from '../data/mock';
 
 const CommentContext = createContext({} as Props);
 
@@ -9,35 +9,24 @@ interface ChildrenProps {
   children: ReactNode;
 }
 
-interface UserProps {
+export interface UserProps {
   image: string;
   username: string;
 }
 
-export interface RepliesProps {
-  id: string;
-  content: string;
-  createdAt: number;
-  score: number;
-  replyingTo: string;
-  user: {
-    image: string;
-    username: string;
-  };
-}
-
 export interface CommentProps {
   id: string;
+  type: 'comment' | 'reply';
   content: string;
   createdAt: number;
   score: number;
+  replyingTo: string | null;
   user: UserProps;
-  replies?: RepliesProps[];
 }
 
 interface Props {
-  loggedUser: UserProps | null;
-  comments: CommentProps[] | null;
+  loggedUser: UserProps;
+  comments: CommentProps[];
   isDeletingComment: boolean;
   isLoading: boolean;
 
@@ -46,8 +35,8 @@ interface Props {
 }
 
 export function CommentProvider({ children }: ChildrenProps) {
-  const [comments, setComments] = useState<CommentProps[] | null>(null);
-  const [loggedUser, setLoggedUser] = useState<UserProps | null>(null);
+  const [comments, setComments] = useState<CommentProps[]>(data.comments);
+  const [loggedUser, setLoggedUser] = useState<UserProps>(data.currentUser);
   const [isDeletingComment, setIsDeletingComment] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
