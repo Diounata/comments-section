@@ -5,6 +5,7 @@ const Container = styled.div`
   gap: 1rem;
 
   width: calc(100vw - 2rem);
+  min-height: 100vh;
   padding: 2rem 0;
 
   @media (min-width: 768px) {

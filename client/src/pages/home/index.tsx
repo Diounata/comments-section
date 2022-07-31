@@ -1,6 +1,7 @@
 import { Container } from './styles';
 import { Fragment } from 'react';
 
+import { Loading } from '../../components/Loading';
 import { Comment } from '../../components/Comment';
 import { AddComment } from '../../components/AddComment';
 import { DeleteModal } from '../../components/DeleteModal';
@@ -13,7 +14,7 @@ export function Home() {
   return (
     <Container>
       {isLoading ? (
-        'Loading'
+        <Loading />
       ) : (
         <>
           {comments!.map((comment, index) => (
@@ -28,10 +29,10 @@ export function Home() {
           ))}
 
           <AddComment type="comment" />
-
-          {isDeletingComment && <DeleteModal />}
         </>
       )}
+
+      {isDeletingComment && <DeleteModal />}
     </Container>
   );
 }

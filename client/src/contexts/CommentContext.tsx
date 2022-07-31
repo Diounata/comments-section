@@ -28,9 +28,11 @@ interface Props {
   loggedUser: UserProps;
   comments: CommentProps[];
   isDeletingComment: boolean;
+  deletingCommentID: string;
   isLoading: boolean;
 
-  toggleIsDeletingComment(): void;
+  deleteComment(id: string): void;
+  toggleIsDeletingComment(id: string): void;
   getCreatedAtString(date: number): string;
 }
 
@@ -38,9 +40,17 @@ export function CommentProvider({ children }: ChildrenProps) {
   const [comments, setComments] = useState<CommentProps[]>(data.comments);
   const [loggedUser, setLoggedUser] = useState<UserProps>(data.currentUser);
   const [isDeletingComment, setIsDeletingComment] = useState(false);
+  const [deletingCommentID, setDeletingCommentID] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  function toggleIsDeletingComment() {
+  function deleteComment(id: string) {
+    const newComments = comments.filter(comment => comment.id !== id);
+
+    setComments(newComments);
+  }
+
+  function toggleIsDeletingComment(id: string) {
+    setDeletingCommentID(id);
     setIsDeletingComment(prev => !prev);
   }
 
@@ -63,7 +73,9 @@ export function CommentProvider({ children }: ChildrenProps) {
         comments,
         loggedUser,
         isDeletingComment,
+        deletingCommentID,
         isLoading,
+        deleteComment,
         toggleIsDeletingComment,
         getCreatedAtString,
       }}
