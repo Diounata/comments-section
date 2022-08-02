@@ -14,7 +14,8 @@ import ReplySVG from '../../assets/icon-reply.svg';
 import DeleteSVG from '../../assets/icon-delete.svg';
 import EditSVG from '../../assets/icon-edit.svg';
 
-import { CommentProps, useComment } from '../../contexts/CommentContext';
+import { useComment } from '../../contexts/Comment';
+import { CommentProps } from '../../contexts/Comment/commentReducer';
 
 interface Props {
   comment: CommentProps;
@@ -22,7 +23,7 @@ interface Props {
 }
 
 export function Comment({ comment, isFirstReply }: Props) {
-  const { loggedUser, deleteComment, toggleIsDeletingComment, getCreatedAtString } = useComment();
+  const { loggedUser, dispatch, getCreatedAtString } = useComment();
 
   return (
     <Container isFirstReply={isFirstReply} type={comment.type}>
@@ -59,7 +60,12 @@ export function Comment({ comment, isFirstReply }: Props) {
       <ButtonsContainer>
         {comment.user.username === loggedUser!.username ? (
           <>
-            <Button color="RED" onClick={() => toggleIsDeletingComment(comment.id)}>
+            <Button
+              color="RED"
+              onClick={() =>
+                dispatch({ type: 'TOGGLE_IS_DELETING_COMMENT', payload: { id: comment.id } })
+              }
+            >
               <img src={DeleteSVG} alt="Delete" title="Delete" /> Delete
             </Button>
 

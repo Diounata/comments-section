@@ -1,10 +1,10 @@
 import { GlobalContainer, Modal, Title, Message, Footer, Button } from './styles';
 
-import { useComment } from '../../contexts/CommentContext';
+import { useComment } from '../../contexts/Comment';
 import { useDeleteModal } from './logic';
 
 export function DeleteModal() {
-  const { toggleIsDeletingComment } = useComment();
+  const { dispatch } = useComment();
   const { handleDeleting } = useDeleteModal();
 
   return (
@@ -13,12 +13,14 @@ export function DeleteModal() {
         <Title>Delete comment</Title>
 
         <Message>
-          Are you sure you want to delete this comment? This will remove the comment and can't be
-          undone
+          Are you sure you want to delete this comment? This will remove the comment and can't be undone
         </Message>
 
         <Footer>
-          <Button variation="cancel" onClick={() => toggleIsDeletingComment('')}>
+          <Button
+            variation="cancel"
+            onClick={() => dispatch({ type: 'TOGGLE_IS_DELETING_COMMENT', payload: { id: '' } })}
+          >
             No, cancel
           </Button>
 

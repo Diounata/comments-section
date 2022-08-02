@@ -1,7 +1,7 @@
 import { KeyboardEvent } from 'react';
 import { Container, Comment, Avatar, Button } from './styles';
 
-import { useComment } from '../../contexts/CommentContext';
+import { useComment } from '../../contexts/Comment';
 
 interface Props {
   type: 'comment' | 'reply';

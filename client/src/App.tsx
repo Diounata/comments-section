@@ -1,4 +1,4 @@
-import { CommentProvider } from './contexts/CommentContext';
+import { CommentProvider } from './contexts/Comment';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from './components/globalStyle';

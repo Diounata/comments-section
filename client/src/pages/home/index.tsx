@@ -6,7 +6,7 @@ import { Comment } from '../../components/Comment';
 import { AddComment } from '../../components/AddComment';
 import { DeleteModal } from '../../components/DeleteModal';
 
-import { useComment } from '../../contexts/CommentContext';
+import { useComment } from '../../contexts/Comment';
 
 export function Home() {
   const { comments, isDeletingComment, isLoading } = useComment();

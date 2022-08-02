@@ -1,15 +1,14 @@
-import { UserProps, CommentProps } from '../contexts/CommentContext';
+import { StateProps } from './commentReducer';
 
-interface DataProps {
-  currentUser: UserProps;
-  comments: CommentProps[];
-}
-
-export const data: DataProps = {
-  currentUser: {
+export const initialState: StateProps = {
+  loggedUser: {
     image: 'image-juliusomo.png',
     username: 'juliusomo',
   },
+
+  isDeletingComment: false,
+  deletingCommentID: '',
+  isLoading: true,
 
   comments: [
     {

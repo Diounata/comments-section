@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 
-import { useComment } from '../../contexts/CommentContext';
+import { useComment } from '../../contexts/Comment';
 
 export function useDeleteModal() {
-  const { deletingCommentID, deleteComment, toggleIsDeletingComment } = useComment();
+  const { dispatch } = useComment();
 
   function handleDeleting() {
-    deleteComment(deletingCommentID);
-    toggleIsDeletingComment('');
+    dispatch({ type: 'DELETE_COMMENT' });
   }
 
   useEffect(() => {
