@@ -33,7 +33,7 @@ export function Comment({ comment, isFirstReply }: Props) {
         <p>
           {comment.user.username}
 
-          {comment.user.username === loggedUser!.username && <span>you</span>}
+          {comment.user.username === loggedUser.username && <span>you</span>}
         </p>
 
         <span>{getCreatedAtString(comment.createdAt)}</span>
@@ -58,7 +58,7 @@ export function Comment({ comment, isFirstReply }: Props) {
       </FeedbackContainer>
 
       <ButtonsContainer>
-        {comment.user.username === loggedUser!.username ? (
+        {comment.user.username === loggedUser.username ? (
           <>
             <Button
               color="RED"
